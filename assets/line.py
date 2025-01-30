@@ -1,4 +1,4 @@
-from point import Point
+from assets.point import Point
 
 class Line():
 

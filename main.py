@@ -1,8 +1,5 @@
-from Window import Window
-from line import Line
-from point import Point
-from cell import Cell
-from maze import Maze
+from assets.window import Window
+from assets.maze import Maze
 
 def main():
     win = Window(800, 600)
@@ -29,8 +26,7 @@ def main():
     # c4.draw(150, 100, 200, 150)
 
     # c3.draw_move(c4, True)
-
-    maze = Maze(1, 1, 5, 5, 50, 50, win)
+    Maze(1, 1, 5, 5, 50, 50, win)
 
     win.wait_for_close()
 

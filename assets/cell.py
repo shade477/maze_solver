@@ -1,6 +1,5 @@
-
-from line import Line
-from point import Point
+from assets.line import Line
+from assets.point import Point
 
 
 class Cell:

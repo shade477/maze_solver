@@ -1,4 +1,4 @@
-from cell import Cell
+from assets.cell import Cell
 import time
 
 class Maze:

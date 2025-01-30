@@ -1,6 +1,6 @@
 from tkinter import Tk, BOTH, Canvas
 import tkinter as tk
-from line import Line
+from assets.line import Line
 
 class Window:
 
