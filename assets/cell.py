@@ -15,7 +15,7 @@ class Cell:
         self._win = win
 
 
-    def draw(self, x1, y1, x2, y2):
+    def draw(self, x1, y1, x2, y2, fill='black'):
         if not self._win:
             return
         
@@ -31,18 +31,97 @@ class Cell:
         }
         
         if self.has_top_wall:
-            self._win.draw_line(lines['top'])
+            self._win.draw_line(lines['top'], fill)
 
         if self.has_left_wall:
-            self._win.draw_line(lines['left'])
+            self._win.draw_line(lines['left'], fill)
 
         if self.has_bottom_wall:
-            self._win.draw_line(lines['bottom'])
+            self._win.draw_line(lines['bottom'], fill)
 
         if self.has_right_wall:
-            self._win.draw_line(lines['right'])
+            self._win.draw_line(lines['right'], fill)
 
     
+    @property
+    def x1(self):
+        return self._x1
+    
+
+    @property
+    def x2(self):
+        return self._x2
+    
+    
+    @property
+    def y1(self):
+        return self._y1
+    
+
+    @property
+    def y2(self):
+        return self._y2
+    
+
+    @property
+    def has_bottom_wall(self):
+        return self.has_bottom_wall
+    
+    @property
+    def has_top_wall(self):
+        return self.has_top_wall
+    
+
+    @property
+    def has_left_wall(self):
+        return self.has_left_wall
+    
+
+    @property
+    def has_right_wall(self):
+        return self.has_right_wall
+    
+
+    @x1.setter
+    def x1(self, x):
+        self._x1 = x
+
+
+    @x2.setter
+    def x2(self, x):
+        self._x2 = x
+
+
+    @y1.setter
+    def y1(self, y):
+        self._y1 = y
+
+
+    @y2.setter
+    def y2(self, y):
+        self._y2 = y
+
+    
+    @has_bottom_wall.setter
+    def has_bottom_wall(self, value):
+        self.has_bottom_wall = value
+
+     
+    @has_top_wall.setter
+    def has_top_wall(self, value):
+        self.has_top_wall = value
+
+   
+    @has_left_wall.setter
+    def has_left_wall(self, value):
+        self.has_left_wall = value
+
+
+    @has_right_wall.setter
+    def has_right_wall(self, value):
+        self.has_right_wall = value
+
+
     def get_center(self):
         xh = abs(self._x2 - self._x1)/2
         yh = abs(self._y2 - self._y1)/2
