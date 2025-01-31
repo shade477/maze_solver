@@ -4,10 +4,10 @@ from assets.point import Point
 
 class Cell:
     def __init__(self, win=None):
-        self.has_left_wall = True
-        self.has_right_wall = True
-        self.has_top_wall = True
-        self.has_bottom_wall = True
+        self._has_left_wall = True
+        self._has_right_wall = True
+        self._has_top_wall = True
+        self._has_bottom_wall = True
         self._x1 = None
         self._x2 = None
         self._y1 = None
@@ -15,34 +15,6 @@ class Cell:
         self._win = win
 
 
-    def draw(self, x1, y1, x2, y2, fill='black'):
-        if not self._win:
-            return
-        
-        self._x1 = x1
-        self._y1 = y1
-        self._x2 = x2
-        self._y2 = y2
-        lines = {
-            'top': Line(Point(x1, y1), Point(x2, y1)),
-            'left': Line(Point(x1, y1), Point(x1, y2)),
-            'right': Line(Point(x2, y1), Point(x2, y2)),
-            'bottom': Line(Point(x1, y2), Point(x2, y2)),
-        }
-        
-        if self.has_top_wall:
-            self._win.draw_line(lines['top'], fill)
-
-        if self.has_left_wall:
-            self._win.draw_line(lines['left'], fill)
-
-        if self.has_bottom_wall:
-            self._win.draw_line(lines['bottom'], fill)
-
-        if self.has_right_wall:
-            self._win.draw_line(lines['right'], fill)
-
-    
     @property
     def x1(self):
         return self._x1
@@ -65,21 +37,21 @@ class Cell:
 
     @property
     def has_bottom_wall(self):
-        return self.has_bottom_wall
+        return self._has_bottom_wall
     
     @property
     def has_top_wall(self):
-        return self.has_top_wall
+        return self._has_top_wall
     
 
     @property
     def has_left_wall(self):
-        return self.has_left_wall
+        return self._has_left_wall
     
 
     @property
     def has_right_wall(self):
-        return self.has_right_wall
+        return self._has_right_wall
     
 
     @x1.setter
@@ -104,23 +76,83 @@ class Cell:
     
     @has_bottom_wall.setter
     def has_bottom_wall(self, value):
-        self.has_bottom_wall = value
+        self._has_bottom_wall = value
 
      
     @has_top_wall.setter
     def has_top_wall(self, value):
-        self.has_top_wall = value
+        self._has_top_wall = value
 
    
     @has_left_wall.setter
     def has_left_wall(self, value):
-        self.has_left_wall = value
+        self._has_left_wall = value
 
 
     @has_right_wall.setter
     def has_right_wall(self, value):
-        self.has_right_wall = value
+        self._has_right_wall = value
 
+
+    def draw(self, x1, y1, x2, y2):
+        if not self._win:
+            return
+        
+        self._x1 = x1
+        self._y1 = y1
+        self._x2 = x2
+        self._y2 = y2
+        lines = {
+            'top': Line(Point(x1, y1), Point(x2, y1)),
+            'left': Line(Point(x1, y1), Point(x1, y2)),
+            'right': Line(Point(x2, y1), Point(x2, y2)),
+            'bottom': Line(Point(x1, y2), Point(x2, y2)),
+        }
+        
+        if self._has_top_wall:
+            self._win.draw_line(lines['top'])
+
+        if self._has_left_wall:
+            self._win.draw_line(lines['left'])
+
+        if self._has_bottom_wall:
+            self._win.draw_line(lines['bottom'])
+
+        if self._has_right_wall:
+            self._win.draw_line(lines['right'])
+
+    
+    def update_wall(self):
+        lines = {
+            'top': Line(Point(self.x1, self.y1), Point(self.x2, self.y1)),
+            'left': Line(Point(self.x1, self.y1), Point(self.x1, self.y2)),
+            'right': Line(Point(self.x2, self.y1), Point(self.x2, self.y2)),
+            'bottom': Line(Point(self.x1, self.y2), Point(self.x2, self.y2)),
+        }
+        if self._has_top_wall:
+            self._win.draw_line(lines['top'])
+
+        else:
+            self._win.draw_line(lines['top'], 'white')
+
+        if self._has_left_wall:
+            self._win.draw_line(lines['left'], )
+
+        else:
+            self._win.draw_line(lines['left'], 'white')
+
+
+        if self._has_bottom_wall:
+            self._win.draw_line(lines['bottom'])
+        else:
+            self._win.draw_line(lines['bottom'], 'white')
+
+
+        if self._has_right_wall:
+            self._win.draw_line(lines['right'])
+
+        else:
+            self._win.draw_line(lines['right'], 'white')
 
     def get_center(self):
         xh = abs(self._x2 - self._x1)/2

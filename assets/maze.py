@@ -28,6 +28,7 @@ class Maze:
         for c in range(self._num_cols):
             for r in range(self._num_rows):
                 self._draw_cell(c, r)
+        self._break_entrance_and_exit()
 
 
     def _draw_cell(self, i, j):
@@ -39,11 +40,21 @@ class Maze:
         cell.draw(x, y, x + self._cell_size_x, y + self._cell_size_y)
         self._animate()
 
+
     def _animate(self):
         if not self._win:
             return
         self._win.redraw()
         time.sleep(0.05)
+
+
+    def _break_entrance_and_exit(self):
+        self._cells[0][0].has_top_wall = False
+        self._cells[0][0].update_wall()
+        self._cells[self._num_cols - 1][self._num_rows - 1].has_bottom_wall = False
+        self._cells[self._num_cols - 1][self._num_rows - 1].update_wall()
+        self._win.redraw()
+
 
     def __eq__(self, maze):
         return (self._x1 == maze._x1 and
