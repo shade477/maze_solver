@@ -10,7 +10,7 @@ class Maze:
         num_cols,
         cell_size_x,
         cell_size_y,
-        win,
+        win=None,
     ):
         self._x1 = x1
         self._y1 = y1
@@ -31,8 +31,8 @@ class Maze:
 
 
     def _draw_cell(self, i, j):
-        x = self._x1 + (i + 1) * self._cell_size_x
-        y = self._y1 + (j + 1) * self._cell_size_y
+        x = self._x1 + (i) * self._cell_size_x
+        y = self._y1 + (j) * self._cell_size_y
 
         # Change if num rows and cols mismatch
         cell = self._cells[i][j]
@@ -44,3 +44,13 @@ class Maze:
             return
         self._win.redraw()
         time.sleep(0.05)
+
+    def __eq__(self, maze):
+        return (self._x1 == maze._x1 and
+        self._y1 == maze._y1 and
+        self._num_rows == maze._num_rows and
+        self._num_cols == maze._num_cols and
+        self._cell_size_x == maze._cell_size_x and
+        self.cell_size_y == maze.cell_size_y and
+        self._win == maze._win)
+
